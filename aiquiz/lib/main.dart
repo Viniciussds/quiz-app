@@ -2,6 +2,7 @@
 
 import 'package:aiquiz/views/login_screen.dart';
 import 'package:aiquiz/views/singUp_screen.dart';
+import 'package:aiquiz/widgets/my_home_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const LoginPage(), // rota inicial
         '/login': (context) => const LoginPage(), // rota para login
         '/singup': (context) => const SingUpPage(), // rota para cadastro
+        '/home' : (context) => const HomePage(), 
       },
     );
   }
