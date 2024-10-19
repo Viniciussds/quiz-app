@@ -16,19 +16,21 @@ class SingUpController {
   TextEditingController get confirmPasswordController =>
       _confirmPasswordController; // Getter para acessar o confirmPasswordController
 
+  // Validação de e-mail
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Digite um e-mail válido';
+      return 'Por favor, insira um e-mail';
     }
     if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-      return 'Digite um e-mail válido';
+      return 'E-mail inválido';
     }
     return null;
   }
 
+  // Validação de senha
   String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Digite uma senha válida';
+      return 'Por favor, insira uma senha';
     }
     if (value.length < 6) {
       return 'A senha deve ter pelo menos 6 caracteres';
@@ -39,9 +41,10 @@ class SingUpController {
     return null;
   }
 
+  // Validação de confirmação de senha
   String? validateConfirmPassword(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Digite uma senha válida';
+      return 'Por favor, confirme sua senha';
     }
     if (value != _passwordController.text) {
       return 'As senhas não coincidem';
@@ -49,16 +52,17 @@ class SingUpController {
     return null;
   }
 
+  // Função de submissão do formulá
   Future<void> submit(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
       User user = User(
         email: _emailController.text,
         password: _passwordController.text,
       );
-      bool result = await user.singUp();
+      bool result = await user.signUp();
 
       if (result) {
-        // navegação para proxima tela e mensagem de sucesso
+        // Mensagem de sucesso
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Usuário registrado com sucesso!',
@@ -67,9 +71,11 @@ class SingUpController {
             duration: Duration(seconds: 2),
           ),
         );
-        Navigator.pushNamed(context, 'home');
+
+        // Redirecionar para a página de login
+        Navigator.pop(context); // Isso fecha a página de registro
       } else {
-        // mensagem de erro
+        // Mensagem de erro
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Erro ao registrar usuário!',
@@ -80,5 +86,12 @@ class SingUpController {
         );
       }
     }
+  }
+
+  // Lembre-se de limpar os controladores ao sair da página
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
   }
 }

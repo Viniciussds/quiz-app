@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const LoginPage(), // rota inicial
         '/login': (context) => const LoginPage(), // rota para login
         '/singup': (context) => const SingUpPage(), // rota para cadastro
-        '/home' : (context) => const HomePage(), 
+        '/home': (context) => const HomePage(),
       },
     );
   }

@@ -20,7 +20,7 @@ class Singincontroller {
     bool result = await user.signIn();
 
     if (result) {
-      Navigator.pop(context);
+      Navigator.pushNamed(context, '/home');
     } else {
       // mensagem de erro
       ScaffoldMessenger.of(context).showSnackBar(

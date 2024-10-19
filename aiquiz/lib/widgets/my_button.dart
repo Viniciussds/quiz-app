@@ -4,7 +4,11 @@ class MyButton extends StatelessWidget {
   final String text;
   final void Function()? onTap;
 
-  const MyButton({super.key, required this.text, this.onTap});
+  const MyButton(
+      {super.key,
+      required this.text,
+      this.onTap,
+      CircularProgressIndicator? icon});
 
   @override
   Widget build(BuildContext context) {
